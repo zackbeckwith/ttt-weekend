@@ -3,26 +3,14 @@
 
 
 /*---------------------------- Variables (state) ----------------------------*/
-let win, lose, tie, turn, winner 
-
+let win, lose, tie, turn, winner
+let board = []
+winner = 'T'
 
 /*------------------------ Cached Element References ------------------------*/
-const sq0 = document.querySelector('#sq0')
-const sq1 = document.querySelector('#sq1')
-const sq2 = document.querySelector('#sq2')
-const sq3 = document.querySelector('#sq3')
-const sq4 = document.querySelector('#sq4')
-const sq5 = document.querySelector('#sq5')
-const sq6 = document.querySelector
-('#sq6')
-const sq7 = document.querySelector('#sq7')
-const sq8 = document.querySelector('#sq8')
+const squareEls = document.querySelectorAll('div')
+const gameStatus = document.querySelector('h2')
 
-
-const gameStatus = document.querySelector('#message')
-
-let board = [sq0,sq1,sq2,sq3,sq4,sq5,sq6,sq7,sq8]
-console.log(board)
 /*----------------------------- Event Listeners -----------------------------*/
 
 
@@ -31,56 +19,36 @@ console.log(board)
 init ();
 
 function init() {
-  board.map((square)=>{
-    square = 'boi'
-  })
-  console.log(board)
+  board = [-1,1,null,-1,1,null,-1,1,null]
+	turn = -1
+	render()
 }
+function render() {
+	board.forEach((square, index) => {
+		if(square === -1) {
+			squareEls[index].textContent = 'x'
+		} else if(square === 1) {
+			squareEls[index].textContent = 'o'
+		}else {
+			squareEls[index].textContent = null
+		}
+	})
+		if(winner === null){
+			gameStatus.textContent = `It's ${turn === 1 ? "Player 1's turn" : "Player 2's turn!"}`
+		}
+		gameStatus.textContent = `${winner === 'T' ? "It's a tie!" : "Congrats!" + playerName() + " won!"}`
+	}
 
-// 1) Define the required variables used to track the state of the game:
+	function playerName(){
+		if(turn === 1){
+			return "Player 1"
+		} else if (turn === -1){
+			return "Player 2"
+	// }else if(winner === tie){
+	// 	gameStatus.textContent = 'you won!'
+	// }else {
+	// 	gameStatus.textContent = 'you won!'
 
-  // None of these variables will need to hold a value when they are defined
-  
-
-	// 1.1) Use an array to represent the squares on the board.    
-
-	// 1.2) Use a turn variable to track whose turn it is.
-
-	// 1.3) Use a winner variable to represent three different game states:
-	  // a player that won
-	  // a tie has occured
-	  // or a game that is still in play.
-
-// 2) Store cached element references on the page that will be accessed in code more than once in variables to make code more concise, readable, and performant:
-	
-	// 2.1) Store the 9 elements that represent the squares on the page.
-	  // You may want to give each square a class name in your HTML to make this easier!
-
-	// 2.2) Store the element that displays the game status on the page.
-
-// 3) Upon loading, the app should:
-
-	// 3.1) Call an initialize function
-
-	// 3.2) That initialize function should initialize the state variables:
-	  // 3.2.1) Initialize the board array to 9 nulls to represent empty squares. 
-	    // The 9 elements will "map" to each square.
-	    // Index 0 represents the top-left square.
-	    // Index 1 represents the top-middle square.
-			// So on, continuing through the entire board until...
-	    // Index 8 maps to the bottom-right square.
-	  // 3.2.2) Initialize whose turn it is to 1 (player 'X'). 
-	    // Player 'O' will be represented by -1.
-	  // 3.2.3) Initialize the winner variable to null.
-	    // This represents that there is no winner or tie yet. 
-	    // The winner variable will hold the player value (1 or -1) if there's a winner. 
-	    // The winner will hold a 'T' if there's a tie.
-	  // 3.2.4) Render those state variables to the page by calling a render function.
-
-	// 3.3) The render function should:
-	  // 3.3.1) Loop over the board array (which represents the squares on the page), and for each iteration:
-		  // 3.3.1.1) Use the index of the iteration to access the square in the squares array that corresponds with the current cell being iterated over in the board array
-		  // 3.3.1.2) Style that square however you wish dependant on the value contained in the current cell being iterated over (-1, 1, or null)
 	  // 3.3.2) Render a message reflecting the currrent game state:
 	    // 3.3.2.1) If winner has a value other than null (game still in progress), render whose turn it is.
 	      // Hint: Maybe use a ternary inside of a template literal here?
@@ -145,3 +113,55 @@ function init() {
 	// 6.2) Store the new replay button element
 
 	// 6.3) Do steps 4.1 (initialize the state variables) and 4.2 (render).
+
+
+
+
+
+
+
+
+
+	// 1) Define the required variables used to track the state of the game:
+
+  // None of these variables will need to hold a value when they are defined
+  
+
+	// 1.1) Use an array to represent the squares on the board.    
+
+	// 1.2) Use a turn variable to track whose turn it is.
+
+	// 1.3) Use a winner variable to represent three different game states:
+	  // a player that won
+	  // a tie has occured
+	  // or a game that is still in play.
+
+// 2) Store cached element references on the page that will be accessed in code more than once in variables to make code more concise, readable, and performant:
+	
+	// 2.1) Store the 9 elements that represent the squares on the page.
+	  // You may want to give each square a class name in your HTML to make this easier!
+
+	// 2.2) Store the element that displays the game status on the page.
+
+// 3) Upon loading, the app should:
+
+	// 3.1) Call an initialize function
+
+	// 3.2) That initialize function should initialize the state variables:
+	  // 3.2.1) Initialize the board array to 9 nulls to represent empty squares. 
+	    // The 9 elements will "map" to each square.
+	    // Index 0 represents the top-left square.
+	    // Index 1 represents the top-middle square.
+			// So on, continuing through the entire board until...
+	    // Index 8 maps to the bottom-right square.
+	  // 3.2.2) Initialize whose turn it is to 1 (player 'X'). 
+	    // Player 'O' will be represented by -1.
+	  // 3.2.3) Initialize the winner variable to null.
+	    // This represents that there is no winner or tie yet. 
+	    // The winner variable will hold the player value (1 or -1) if there's a winner. 
+	    // The winner will hold a 'T' if there's a tie.
+	  // 3.2.4) Render those state variables to the page by calling a render function.
+	// 3.3) The render function should:
+	  // 3.3.1) Loop over the board array (which represents the squares on the page), and for each iteration:
+		  // 3.3.1.1) Use the index of the iteration to access the square in the squares array that corresponds with the current cell being iterated over in the board array
+		  // 3.3.1.2) Style that square however you wish dependant on the value contained in the current cell being iterated over (-1, 1, or null)
