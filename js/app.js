@@ -52,8 +52,6 @@ function playerName() {
 		output = 'Player 2';
 	} else if (turn === -1) {
 		output = 'Player 1';
-	} else {
-		output = 'Error in func playerName()';
 	}
 	return output;
 }
