@@ -1,7 +1,38 @@
 /*-------------------------------- Constants --------------------------------*/
-
-
-
+const winCondition = [ //step 4
+//Player 1
+	[1,0,0,
+	0,1,0,
+	0,0,1],
+	[0,0,1,
+	0,1,0,
+	1,0,0],
+	 
+	[0,1,0,
+	0,1,0,
+	0,1,0],
+	 
+	[0,0,0,
+	1,1,1,
+	0,0,0],
+//Player Two
+	[-1,0,0,
+	0,-1,0,
+	0,0,-1],
+		
+	[0,0,-1,
+	0,-1,0,
+	-1,0,0],
+		
+	[0,-1,0,
+	0,-1,0,
+	0,-1,0],
+		
+	[0,0,0,
+	-1,-1,-1,
+	0,0,0],
+]
+console.log(winCondition)
 /*---------------------------- Variables (state) ----------------------------*/
 let win, lose, tie, turn, winner
 let board = []
@@ -18,12 +49,12 @@ const gameStatus = document.querySelector('h2')
 /*-------------------------------- Functions --------------------------------*/
 init ();
 
-function init() {
+function init() { //step 3.2
   board = [-1,1,null,-1,1,null,-1,1,null]
 	turn = -1
 	render()
 }
-function render() {
+function render() { //step 3.3
 	board.forEach((square, index) => {
 		if(square === -1) {
 			squareEls[index].textContent = 'x'
@@ -39,31 +70,22 @@ function render() {
 		gameStatus.textContent = `${winner === 'T' ? "It's a tie!" : "Congrats!" + playerName() + " won!"}`
 	}
 
-	function playerName(){
-		if(turn === 1){
-			return "Player 1"
-		} else if (turn === -1){
-			return "Player 2"}
+	function playerName() {
+		let output;
+		if (turn === 1) {
+			output = 'Player 1';
+		} else if (turn === -1) {
+			output = 'Player 2';
+		} else {
+			output = 'Error in func playerName()';
 		}
-	// }else if(winner === tie){
-	// 	gameStatus.textContent = 'you won!'
-	// }else {
-	// 	gameStatus.textContent = 'you won!'
+		return output;
+	}
 
-	  // 3.3.2) Render a message reflecting the currrent game state:
-	    // 3.3.2.1) If winner has a value other than null (game still in progress), render whose turn it is.
-	      // Hint: Maybe use a ternary inside of a template literal here?
-	    // 3.3.2.2) If winner is equal to 'T' (tie), render a tie message.
-	    // 3.3.2.3) Otherwise, render a congratulatory message to which player has won.
-	      // Hint (again): Maybe use a ternary inside a template literal here
+	function handleClick() {
+		console.log('hi)')		
+	}
 
-		// 3.4) After completing this step, you should be able to manually change the values held in the board array in the initialization function and see the style of the corresponding square change on your page.
-
-// 4) Define the required constants:
-
-	// 4.1) Define the 8 possible winning combinations as an array of arrays.
-	  // Each array will contain three indexes of the board that make a winner if they hold the same player value. 
-		// If you are having trouble with this step, feel free to check out the winningCombos array in the solution code. 
 
 // 5) Next, the app should wait for the user to click a square and call a handleClick function
   // the handleClick function will...
@@ -166,3 +188,10 @@ function render() {
 	  // 3.3.1) Loop over the board array (which represents the squares on the page), and for each iteration:
 		  // 3.3.1.1) Use the index of the iteration to access the square in the squares array that corresponds with the current cell being iterated over in the board array
 		  // 3.3.1.2) Style that square however you wish dependant on the value contained in the current cell being iterated over (-1, 1, or null)
+
+// 4) Define the required constants:
+
+	// 4.1) Define the 8 possible winning combinations as an array of arrays.
+	  // Each array will contain three indexes of the board that make a winner if they hold the same player value. 
+		// If you are having trouble with this step, feel free to check out the winningCombos array in the solution code. 
+
