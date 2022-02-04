@@ -1,5 +1,5 @@
 /*-------------------------------- Constants --------------------------------*/
-const winCondition = [ //step 4
+const winningCombos = [ //step 4
 //Player 1
 	[1,0,0,
 	0,1,0,
@@ -7,11 +7,11 @@ const winCondition = [ //step 4
 	[0,0,1,
 	0,1,0,
 	1,0,0],
-	 
+
 	[0,1,0,
 	0,1,0,
 	0,1,0],
-	 
+
 	[0,0,0,
 	1,1,1,
 	0,0,0],
@@ -32,34 +32,41 @@ const winCondition = [ //step 4
 	-1,-1,-1,
 	0,0,0],
 ]
-console.log(winCondition)
 /*---------------------------- Variables (state) ----------------------------*/
 let win, lose, tie, turn, winner
 let board = []
-winner = 'T'
-
+winner = '1'
 /*------------------------ Cached Element References ------------------------*/
 const squareEls = document.querySelectorAll('div')
 const gameStatus = document.querySelector('h2')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
+squareEls.forEach(function(square){ square.addEventListener("click", handleClick)})
 
+	// 5.2) If the board has a value at the index, immediately return because that square is already taken.
+
+	// 5.3) If winner is not null, immediately return because the game is over.
+
+	// 5.4) Update the board array at the index with the value of turn.
+
+	// 5.5) Change the turn by multiplying turn by -1 (this flips a 1 to -1, and vice-versa).
 
 /*-------------------------------- Functions --------------------------------*/
 init ();
 
 function init() { //step 3.2
-  board = [-1,1,null,-1,1,null,-1,1,null]
-	turn = -1
+  board = [null,null,null,null,null,null,null,null,null]
+	turn = 1
+	winner = null
 	render()
 }
 function render() { //step 3.3
 	board.forEach((square, index) => {
-		if(square === -1) {
-			squareEls[index].textContent = 'x'
-		} else if(square === 1) {
-			squareEls[index].textContent = 'o'
+		if(square === 1) {
+			squareEls[index].textContent = 'X'
+		} else if(square === -1) {
+			squareEls[index].textContent = 'O'
 		}else {
 			squareEls[index].textContent = null
 		}
@@ -67,25 +74,32 @@ function render() { //step 3.3
 		if(winner === null){
 			gameStatus.textContent = `It's ${turn === 1 ? "Player 1's turn" : "Player 2's turn!"}`
 		}
-		gameStatus.textContent = `${winner === 'T' ? "It's a tie!" : "Congrats!" + playerName() + " won!"}`
+		gameStatus.textContent = `${winner === 'T' ? "It's a tie!" : "Congrats! " + playerName() + " won!"}`
 	}
 
-	function playerName() {
-		let output;
-		if (turn === 1) {
-			output = 'Player 1';
-		} else if (turn === -1) {
-			output = 'Player 2';
-		} else {
-			output = 'Error in func playerName()';
-		}
-		return output;
+function playerName() {
+	let output;
+	if (turn === 1) {
+		output = 'Player 1';
+	} else if (turn === -1) {
+		output = 'Player 2';
+	} else {
+		output = 'Error in func playerName()';
 	}
+	return output;
+}
 
-	function handleClick() {
-		console.log('hi)')		
+function handleClick(evt){
+	if(board[+(evt.target.id.replace("sq",''))] !== null){
+		return
+	} else if(winner !== null){
+		return
+	} else {
+		board[+(evt.target.id.replace("sq",''))] = turn
 	}
-
+	turn *= -1
+	render()
+}
 
 // 5) Next, the app should wait for the user to click a square and call a handleClick function
   // the handleClick function will...
