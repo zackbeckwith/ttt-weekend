@@ -43,7 +43,8 @@ function render() {
 		if(turn === 1){
 			return "Player 1"
 		} else if (turn === -1){
-			return "Player 2"
+			return "Player 2"}
+		}
 	// }else if(winner === tie){
 	// 	gameStatus.textContent = 'you won!'
 	// }else {
