@@ -46,6 +46,7 @@ function render() { //step 3.3
 		if(winner === null){
 			gameStatus.textContent = `It's ${turn === 1 ? "Player 1's turn!" : "Player 2's turn!"}`
 		} else {gameStatus.textContent = `${winner === 'T' ? "It's a tie!" : "Congrats! " + playerName() + " won!"}`
+		resetButton.removeAttribute('hidden')
 	}
 }
 
@@ -83,6 +84,7 @@ function getWinner() {
 
 function resetGame() {
 	init();
+	resetButton.hidden = true
 }
 
 // 5.7) All state has been updated, so render the state to the page (step 3.3).
