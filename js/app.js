@@ -8,9 +8,12 @@ let board = []
 /*------------------------ Cached Element References ------------------------*/
 const squareEls = document.querySelectorAll('div')
 const gameStatus = document.querySelector('h2')
+const resetButton = document.querySelector('button')
 
 /*----------------------------- Event Listeners -----------------------------*/
 squareEls.forEach(function(square){ square.addEventListener("click", handleClick)})
+
+resetButton.addEventListener("click", resetGame)
 
 	// 5.2) If the board has a value at the index, immediately return because that square is already taken.
 
@@ -76,6 +79,10 @@ function getWinner() {
 			winner = 'T'
 		}
 	})
+}
+
+function resetGame() {
+	init();
 }
 
 // 5.7) All state has been updated, so render the state to the page (step 3.3).
