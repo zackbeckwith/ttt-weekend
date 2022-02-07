@@ -15,24 +15,17 @@ squareEls.forEach(function(square){ square.addEventListener("click", handleClick
 
 resetButton.addEventListener("click", resetGame)
 
-	// 5.2) If the board has a value at the index, immediately return because that square is already taken.
-
-	// 5.3) If winner is not null, immediately return because the game is over.
-
-	// 5.4) Update the board array at the index with the value of turn.
-
-	// 5.5) Change the turn by multiplying turn by -1 (this flips a 1 to -1, and vice-versa).
 
 /*-------------------------------- Functions --------------------------------*/
 init ();
 
-function init() { //step 3.2
+function init() {
   board = [null,null,null,null,null,null,null,null,null]
 	turn = 1
 	winner = null
 	render()
 }
-function render() { //step 3.3
+function render() { 
 	getWinner();
 	board.forEach((square, index) => {
 		if(square === 1) {
@@ -86,13 +79,3 @@ function resetGame() {
 	init();
 	resetButton.hidden = true
 }
-
-// 5.7) All state has been updated, so render the state to the page (step 3.3).
-
-// 6) Handle a player clicking the replay button:
-
-	// 6.1) Add a replay button to the HTML document
-
-	// 6.2) Store the new replay button element
-
-	// 6.3) Do steps 4.1 (initialize the state variables) and 4.2 (render).
